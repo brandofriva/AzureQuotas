@@ -1,4 +1,28 @@
-#Credit to Original Solution: https://blogs.msdn.microsoft.com/tomholl/2017/06/11/get-alerts-as-you-approach-your-azure-resource-quotas/
+<#
+.SYNOPSIS
+Update Azure PowerShell modules in an Azure Automation account.
+
+.DESCRIPTION
+Azure Resource Quotas into a Log Analytics Workspace (Using PowerShell)
+Credit to Original Solution: https://blogs.msdn.microsoft.com/tomholl/2017/06/11/get-alerts-as-you-approach-your-azure-resource-quotas/
+
+Prerequisite: an Azure Automation account with an Azure Run As account credential.
+
+.PARAMETER omsWorkspaceId
+A Log Analytics Workspace ID.
+
+.PARAMETER omsSharedKey
+A Log Analytics Shared Key.
+
+.PARAMETER Subscriptions
+A list of subscriptions to gather quota information on. This is formatted ["SubscriptionID1", "SubscriptionID2", "etc"]
+To see a list of subscriptions your account can access use the PowerShell command "Get-AzSubscription". The ID field is the subscription ID.
+
+.PARAMETER locations
+A list of locations for each of the above subscriptions to gather quota information on. This is formatted ["South Africa North", "UK West", "etc"]
+To get a list of locations use the PowerShell command "Get-AzLocation". Either Displayname or Location fields can be used.
+
+#>
 
 Param(
  [string]$omsWorkspaceId,
@@ -6,7 +30,6 @@ Param(
  [string[]]$Subscriptions,
  [string[]]$locations
 )
-
 
 $connectionName = "AzureRunAsConnection"
 try
